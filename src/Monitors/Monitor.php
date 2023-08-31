@@ -80,14 +80,13 @@ abstract class Monitor
 
         }
 
-        if ($skip === false) {
-
-            $result = $this->model->create([
+        if ($skip === false) { 
+            $result = $this->model->forceFill([
                 'type' => $type,
                 'is_slow' => $isSlow ? '1' : '0',
                 'content' => $content,
                 'created_at' => now(),
-            ]);
+            ])->save();
         }
 
         Meter::startMonitoring();

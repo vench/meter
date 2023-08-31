@@ -16,9 +16,9 @@ class CreateMeterEntriesTable extends Migration
         Schema::connection(config('meter.storage.database.connection'))
             ->create('meter_entries', static function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('type', 20);
+                $table->string('type', 20)->default('some');
                 $table->enum('is_slow', ['No', 'Yes'])->default('No');
-                $table->longText('content');
+                $table->longText('content')->nullable();
                 $table->dateTime('created_at')->nullable();
 
                 $table->index(['type']);
